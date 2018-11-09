@@ -2,11 +2,12 @@
 create database bdmeta;
 --criacao tabela
 create table meta(
-    id int,
+    id serial,
     nome varchar(100) NOT NULL,
     descricao varchar(1000) NOT NULL,
     prioridade int NOT NULL,
     idusuario char(11) NOT NULL,
+    dataprevisao date NOT NULL,
     CONSTRAINT metapk PRIMARY KEY (id),
     CONSTRAINT usuariofk FOREIGN KEY (idusuario) REFERENCES usuario(cpf)
         ON UPDATE CASCADE

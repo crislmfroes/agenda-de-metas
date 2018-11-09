@@ -3,7 +3,7 @@ include_once('usuario.php');
 class UsuarioDao {
 
     private function getConexao() {
-        $str_con = "host=localhost port=5432 dbname=bdusuario user=postgres password=postgres";
+        $str_con = "host=localhost port=5432 dbname=bdmeta user=postgres password=postgres";
         $conexao = pg_connect($str_con);
         if (!$conexao) {
             throw 'conexão com BD falhou!';

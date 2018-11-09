@@ -8,12 +8,11 @@ class Meta{
     private $data;
     private $usuario;
 
-    public function __construct($nome, $descricao, $prioridade, $data, $usuario){
+    public function __construct(string $nome, string $descricao, int $prioridade, DateTime $data){
         $this->nome = $nome;
         $this->descricao = $descricao;
         $this->prioridade = $prioridade;
         $this->data = $data;
-        $this->usuario = $usuario;
     }
     public function getId(){
         return $this->id;
@@ -33,23 +32,23 @@ class Meta{
     public function getUsuario(){
         return $this->usuario;
     }
-    public function setDescricao($descricao){
+    public function setDescricao(string $descricao){
         $this->descricao = $descricao;
     }
-    public function setPrioridade($prioridade){
+    public function setPrioridade(int $prioridade){
         if($prioridade>=1 && $prioridade<=5)
             $this->prioridade = $prioridade;
     }
-    public function setNome($nome){
+    public function setNome(string $nome){
         $this->nome = $nome;
     }
-    public function setId($id){
+    public function setId(int $id){
         $this->id = $id;
     }
-    public function setData($data) {
+    public function setData(DateTime $data) {
         $this->data = $data;
     }
-    public function setUsuario($usuario) {
+    public function setUsuario(Usuario $usuario) {
         $this->usuario = $usuario;
     }
 }

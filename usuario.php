@@ -4,8 +4,7 @@ class Usuario {
     private $nome;
     private $email;
 
-    public function Usuario($cpf, $nome, $email) {
-        $this->cpf = $cpf;
+    public function Usuario(string $nome, string $email) {
         $this->nome = $nome;
         $this->email = $email;
     }
@@ -22,15 +21,19 @@ class Usuario {
         return $this->email;
     }
 
-    public function setCpf($cpf) {
-        $this->cpf = $cpf;
+    public function setCpf(string $cpf) {
+        if (strlen($cpf) === 11) {
+            $this->cpf = $cpf;
+        } else {
+            throw new Exception('Cpf precisa ter 11 dígitos');
+        }
     }
 
-    public function setNome($nome) {
+    public function setNome(string $nome) {
         $this->nome = $nome;
     }
 
-    public function setEmail($email) {
+    public function setEmail(string $email) {
         $this->email = $email;
     }
 }
