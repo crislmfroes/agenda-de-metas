@@ -1,16 +1,8 @@
 <?php
 include_once('usuario.php');
-class UsuarioDao {
+include_once('dao.php');
 
-    private function getConexao() {
-        $str_con = "host=localhost port=5432 dbname=bdmeta user=postgres password=postgres";
-        $conexao = pg_connect($str_con);
-        if (!$conexao) {
-            throw 'conexão com BD falhou!';
-            pg_close($conexao);
-        }
-        return $conexao;
-    }
+class UsuarioDao extends Dao {
 
     public function inserir($usuario) {
         $vetor = array($usuario->getCpf(), $usuario->getNome(), $usuario->getEmail());
@@ -30,10 +22,12 @@ class UsuarioDao {
 
     public function busca($id) {
         $vetor = array($id);
+        var_dump($id);
         $sql = "SELECT * FROM usuario WHERE cpf=$1";
         $con = $this->getConexao();
         $res = pg_query_params($con, $sql, $vetor);
         $assoc = pg_fetch_assoc($res);
+        var_dump($assoc);
         $usuario = new Usuario($assoc['nome'], $assoc['email']);
         $usuario->setCpf($assoc['cpf']);
         pg_close($con);

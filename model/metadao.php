@@ -1,17 +1,9 @@
 <?php
 include_once('meta.php');
 include_once('usuariodao.php');
-class MetaDao {
+include_once('dao.php');
 
-    private function getConexao() {
-        $str_con = "host=localhost port=5432 dbname=bdmeta user=postgres password=postgres";
-        $conexao = pg_connect($str_con);
-        if (!$conexao) {
-            throw 'conexão com BD falhou!';
-            pg_close($conexao);
-        }
-        return $conexao;
-    }
+class MetaDao extends Dao {
 
     public function inserir($meta) {
         $vetor = array($meta->getNome(), $meta->getDescricao(), $meta->getPrioridade(), $meta->getData()->format('Y-m-d'), $meta->getUsuario()->getCpf());
@@ -63,7 +55,7 @@ class MetaDao {
 
     public function altera($meta) {
         $vetor = array($meta->getId(), $meta->getNome(), $meta->getDescricao(), $meta->getPrioridade(), $meta->getData()->format('Y-m-d'), $meta->getUsuario()->getCpf());
-        $sql = "UPDATE Meta SET nome=$2, descricao=$3, prioridade=$4 dataPrevisao=$5 idUsuario=$6 WHERE id=$1";
+        $sql = "UPDATE Meta SET nome=$2, descricao=$3, prioridade=$4, dataPrevisao=$5, idUsuario=$6 WHERE id=$1";
         $con = $this->getConexao();
         $res = pg_query_params($con, $sql, $vetor);
         pg_close($con);
